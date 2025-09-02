@@ -24,7 +24,7 @@ def create_news():
 	data = request.json
 	return jsonify(data), 201
 
-@app.route("/news/<int:item_id>", methods=["POST"])
+@app.route("/news/<int:item_id>", methods=["PUT"])
 @basic_auth.required
 def update_news(item_id: int):
 	item = news[item_id]
