@@ -21,7 +21,11 @@ def list_news():
 @app.route("/news", methods=["POST"])
 @basic_auth.required
 def create_news():
+	global next_id
 	data = request.json
+	data["id"] = next_id
+	next_id += 1
+	news.append(data)
 	return jsonify(data), 201
 
 @app.route("/news/<int:item_id>", methods=["PUT"])
