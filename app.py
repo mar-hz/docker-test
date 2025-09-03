@@ -41,7 +41,11 @@ def update_news(item_id: int):
 @app.route("/news/<int:item_id>", methods=["DELETE"])
 @basic_auth.required
 def delete_news(item_id: int):
+	global next_id
 	del news[item_id]
+	for i in range(item_id, len(news)):
+		news[i]["id"] = i
+	next_id = len(news)
 	return jsonify({"status": "deleted", "id": item_id})
 
 if __name__ == "__main__":
